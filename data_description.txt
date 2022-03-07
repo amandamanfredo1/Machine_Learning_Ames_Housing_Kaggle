@@ -163,7 +163,7 @@ HouseStyle: Style of dwelling
        SFoyer	Split Foyer
        SLvl	Split Level
 	
-OverallQual: Rates the overall material and finish of the house
+HouseStyle: Rates the overall material and finish of the house
 
        10	Very Excellent
        9	Excellent
