@@ -38,26 +38,29 @@ import statsmodels.api as sm
 
 homes=pd.read_csv(r"/Users/tiko/Documents/Machine_Learning_Ames_Housing_Kaggle/Ames_HousePrice.csv")
 
+## How features will be classified based ond EDA and preprocessing 
+    
+num_feat = ['GrLivArea','LotFrontage', 'LotArea','YearBuilt','GarageArea', 'TotSft','YearRemodAdd','BsmtFinSF1',
+           'BsmtUnfSF','TotalBsmtSF','1stFlrSF','2ndFlrSF','LowQualFinSF','BsmtFullBath','BsmtHalfBath','FullBath',
+           'HalfBath','BedroomAbvGr','KitchenAbvGr','TotRmsAbvGrd','Fireplaces','GarageYrBlt','WoodDeckSF',]
+
+ord_cat = ['Condition1','Condition2', 'OverallQual','OverallCond','ExterQual','ExterCond',
+          'BsmtQual','BsmtCond','KitchenQual','GarageQual','GarageCond', 'HeatingQC', 'Neighborhood','GarageFinish',
+          'GarageCars',]
+
+
+nom_cat = ['MSSubClass','MSZoning','Street','LotShape','LandContour','Utilities','LotConfig','LandSlope',
+          'BldgType','HouseStyle','RoofStyle','RoofMatl','Exterior1st','Exterior2nd',
+          'Foundation','BsmtExposure','BsmtFinType1', 'BsmtFinType2', 'Heating','CentralAir',
+          'Electrical','Functional', 'GarageType', 'GarageFinish']
+
+    
 def preprocessed_DF(df):
     
     df = homes.copy()
     
     
-    ## How features will be classified based ond EDA and preprocessing 
-    
-    num_feat = ['GrLivArea','LotFrontage', 'LotArea','YearBuilt','GarageArea', 'TotSft','YearRemodAdd','BsmtFinSF1',
-           'BsmtUnfSF','TotalBsmtSF','1stFlrSF','2ndFlrSF','LowQualFinSF','BsmtFullBath','BsmtHalfBath','FullBath',
-           'HalfBath','BedroomAbvGr','KitchenAbvGr','TotRmsAbvGrd','Fireplaces','GarageYrBlt','WoodDeckSF',]
-
-    ord_cat = ['Condition1','Condition2', 'OverallQual','OverallCond','ExterQual','ExterCond',
-          'BsmtQual','BsmtCond','KitchenQual','GarageQual','GarageCond', 'HeatingQC', 'Neighborhood','GarageFinish',
-          'GarageCars',]
-
-
-    nom_cat = ['MSSubClass','MSZoning','Street','LotShape','LandContour','Utilities','LotConfig','LandSlope',
-          'BldgType','HouseStyle','RoofStyle','RoofMatl','Exterior1st','Exterior2nd',
-          'Foundation','BsmtExposure','BsmtFinType1', 'BsmtFinType2', 'Heating','CentralAir',
-          'Electrical','Functional', 'GarageType', 'GarageFinish']
+   
     
     '''
     *** Feature Engineering based on EDA ***
@@ -92,8 +95,8 @@ def preprocessed_DF(df):
           'Electrical','Functional', 'GarageType', 'GarageFinish']
     impute = IterativeImputer(n_nearest_features=10,initial_strategy='median',max_iter=200,random_state=101)
     df[num_feat] = impute.fit_transform(df[num_feat])
-    scaler = RobustScaler()
-    df[num_feat] = scaler.fit_transform(df[num_feat])
+#     scaler = RobustScaler()
+#     df[num_feat] = scaler.fit_transform(df[num_feat])
     ordEncode = OrdinalEncoder()
     df[ord_cat] = ordEncode.fit_transform(df[ord_cat])
     impute_nom = SimpleImputer(strategy='most_frequent')
