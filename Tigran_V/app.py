@@ -25,14 +25,6 @@ def about():
   return render_template('about.html')
 
 
-@app.route("/contact")
-def contact_page():
-  '''
-  Creating contact page.
-  This will have information about ...
-  '''
-  return render_template('contact.html')
-
 @app.route("/howto")
 def how_to():
   '''
@@ -46,11 +38,17 @@ def how_to():
 @app.route("/predict")
 
 def prediction():
+
+  # pickled_train = nfsanfks
+  # read csv  save it locally
+  # access get the info
+ # use pickled tain model to predcit
+
   '''
   Creating Home page.
   This will have information about ...
   '''
-  return None
+  return render_template("predict.html")
 
 
 
